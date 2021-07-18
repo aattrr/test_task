@@ -1,0 +1,19 @@
+{% extends 'test_task/index.html' %}
+{% load static %}
+{% block content %}
+<h2>{{ msg_error }}</h2>
+<h2>Страница входа</h2>
+    <div class="content">
+        <form id="form1" method="post" >
+        {% csrf_token %}
+          <fieldset>
+          <legend>Авторизация</legend><br>
+          <label for="inputtext1">Логин:</label><br>
+          {{ form.username }}<br>
+          <label for="inputtext2">Пароль:</label><br>
+          {{ form.password }}<br><br>
+          <button type="submit">&nbsp; Войти &nbsp; </button><br>
+          </fieldset>
+        </form>
+    </div>
+{% endblock content %}

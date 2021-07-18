@@ -1,0 +1,21 @@
+{% extends 'test_task/index.html' %}
+{% load static %}
+{% block content %}
+<h2>{{ msg_error }}</h2>
+<h2>Перечень заказов в JSON-формате</h2>
+<h4>Пользователь: json</h4>
+<h4>Пароль: json</h4>
+    <div class="content">
+        <form id="form1" method="post" >
+        {% csrf_token %}
+          <fieldset>
+          <legend>Авторизация</legend><br>
+          <label for="inputtext1">Логин:</label><br>
+          {{ form.username }}<br>
+          <label for="inputtext2">Пароль:</label><br>
+          {{ form.password }}<br><br>
+          <button type="submit">&nbsp; Войти &nbsp; </button><br>
+          </fieldset>
+        </form>
+    </div>
+{% endblock content %}

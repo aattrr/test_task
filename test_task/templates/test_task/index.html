@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<head>
+<title>Tropical</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+{% load static %}
+<link href="{% static 'test_task/default.css' %}" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div id="logo">
+      <h1><a href="#">Tropical</a></h1>
+      <h2>Заказы</h2>
+    </div>
+    <div id="content">
+      <div id="sidebar">
+        <div id="menu">
+          <ul>
+            <li class="active"><a href="{% url 'main_page' %}">Главная</a></li>
+            <li><a href="{% url 'order_list' %}">Заказы</a></li>
+            <li><a href="{% url 'export_orders' %}">Экспорт JSON</a></li>
+            {% if request.user.is_authenticated %}
+                <br><br><br><br>
+                <h4 align="center">Добро пожаловать</h4>
+                <h3 align="center">{{ request.user.username.upper }}</h3>
+                <li><a href="{% url 'logout' %}">Выйти</a></li>
+            {% else %}
+                <li><a href="{% url 'login' %}">Войти</a></li>
+                <li><a href="{% url 'signup' %}">Регистрация</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+      <div id="main">
+        <div id="welcome" class="post">
+
+            {% block content %}
+            {% endblock content %}
+
+      </div>
+      <div id="extra" style="clear: both;"></div>
+    </div>
+    <div id="footer">
+     <p>Тестовое задание от Иторум. Выполнил Аюпов Т.Р.</p>
+    </div>
+    </div>
+</body>

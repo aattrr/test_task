@@ -1,0 +1,11 @@
+{% extends 'test_task/index.html' %}
+{% load static %}
+{% block content %}
+<h2>{{ msg_error }}</h2>
+<h2>Страница Регистрации</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}<br>
+        <button type="submit">&nbsp; Зарегистрироваться &nbsp; </button>
+    </form>
+{% endblock content %}

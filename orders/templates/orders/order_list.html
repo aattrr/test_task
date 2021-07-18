@@ -1,0 +1,60 @@
+{% extends 'test_task/index.html' %}
+{% load static %}
+{% block content %}
+
+    {% for i in object_list %}
+        <h3 class="title">
+            <a href="{{ i.get_absolute_url }}">{{ i.title }}</a>
+        </h3>
+        <h4 align="right">{{ i.customer}}</h4>
+            {% if request.user.is_authenticated %}
+                <form method="POST" action="{% url 'delete_order' i.id %}">
+                    {% csrf_token %}
+                    <input type="submit" name="inputsubmit1" value="&nbsp; Удалить &nbsp; " />
+                </form>
+            {% endif %}
+        <hr>
+    {% empty %}
+        <h3>В данный момент нет заказов</h3>
+    {% endfor %}
+    <br><br>
+
+    <ul id="pagination-flickr">
+        {% if page_obj.has_previous %}
+            <li class="previous-off"><a href="?page={{ page_obj.previous_page_number }}"> Назад </a></li>
+        {% else %}
+            <li class="previous-off"><a href="">Назад </a></li>
+        {% endif %}
+        {% for i in page_obj.paginator.page_range %}
+            {% if i != page_obj.number %}
+                <li class="active"><a href="?page={{ i }}">{{ i }}</a></li>
+            {% else %}
+                <li class="active"><a href="#"><span>{{ i }}</span></a></li>
+            {% endif %}
+         {% endfor %}
+        {% if page_obj.has_next %}
+            <li class="previous-off"><a href="?page={{ page_obj.next_page_number }}">Вперёд</a></li>
+        {% else %}
+            <li class="previous-off"><a href="">Вперёд</a></li>
+        {% endif %}
+    </ul>
+
+    <br><br>
+
+{% if request.user.is_authenticated %}
+    <form id="form1" method="post" action="{% url 'create_order' %}">
+    {% csrf_token %}
+      <fieldset>
+      <legend>Добавить заказ</legend>
+      <label for="inputtext1">Наименование заказа:</label><br>
+          {{ order_form.title}}<br>
+      <label for="inputtext2">Заказчик</label><br>
+          {{ order_form.customer}}<br>
+      <label for="inputtext2">Стоимость</label><br>
+          {{ order_form.price}}<br><br>
+      <button type="submit">&nbsp; Добавить &nbsp; </button>
+      </fieldset>
+    </form>
+
+{% endif %}
+{% endblock content %}
