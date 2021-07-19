@@ -3,7 +3,7 @@ services:
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
-    volumes:
-      - /media/data/1/test_task:/app
+#     volumes:
+#       - /media/data/1/test_task:/app
     ports:
       - 8000:8000
